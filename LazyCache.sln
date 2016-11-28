@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{335B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiAsyncCachingSample", "Samples\ApiAsyncCachingSample\ApiAsyncCachingSample.csproj", "{FB8EDC6D-CD41-47AA-9758-D8D796F7728C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConcurrentCacheUsageSample", "ConcurrentCacheUsageSample\ConcurrentCacheUsageSample.csproj", "{1F1D722B-64AA-4E1D-B818-3F7B282E430E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,11 +37,16 @@ Global
 		{FB8EDC6D-CD41-47AA-9758-D8D796F7728C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB8EDC6D-CD41-47AA-9758-D8D796F7728C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB8EDC6D-CD41-47AA-9758-D8D796F7728C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F1D722B-64AA-4E1D-B818-3F7B282E430E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F1D722B-64AA-4E1D-B818-3F7B282E430E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F1D722B-64AA-4E1D-B818-3F7B282E430E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F1D722B-64AA-4E1D-B818-3F7B282E430E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{FB8EDC6D-CD41-47AA-9758-D8D796F7728C} = {335BA426-C839-4996-8476-F3EE4056C40E}
+		{1F1D722B-64AA-4E1D-B818-3F7B282E430E} = {335BA426-C839-4996-8476-F3EE4056C40E}
 	EndGlobalSection
 EndGlobal
