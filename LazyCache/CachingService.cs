@@ -177,7 +177,7 @@ namespace LazyCache
             ObjectCache.Remove(key);
         }
 
-        public ObjectCache ObjectCache { get; }
+        public ObjectCache ObjectCache { get; internal set; }
 
         public async Task<T> GetOrAddAsync<T>(string key, Func<Task<T>> addItemFactory)
         {

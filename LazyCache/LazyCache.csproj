@@ -47,6 +47,7 @@
     <Compile Include="AsyncLazy.cs" />
     <Compile Include="CachingService.cs" />
     <Compile Include="IAppCache.cs" />
+    <Compile Include="InMemoryCacheManager.cs" />
     <Compile Include="Mocks\MockCachingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
