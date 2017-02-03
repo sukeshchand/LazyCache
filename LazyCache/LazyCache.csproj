@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncLazy.cs" />
+    <Compile Include="CacheRemovalLazyUnwrapper.cs" />
     <Compile Include="CachingService.cs" />
     <Compile Include="IAppCache.cs" />
     <Compile Include="InMemoryCacheManager.cs" />

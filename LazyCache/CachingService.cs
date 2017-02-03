@@ -238,15 +238,8 @@ namespace LazyCache
         {
             if (policy?.RemovedCallback != null)
             {
-                var originallCallback = policy.RemovedCallback;
-                policy.RemovedCallback = args =>
-                {
-                    //unwrap the cache item in a callback given one is specified
-                    var item = args?.CacheItem?.Value as Lazy<T>;
-                    if (item != null)
-                        args.CacheItem.Value = item.IsValueCreated ? item.Value : default(T);
-                    originallCallback(args);
-                };
+                var originalCallback = policy.RemovedCallback;
+                policy.RemovedCallback = new CacheRemovalLazyUnwrapper<T>().UnwrapLazyPolicyRemovedCallback(originalCallback);
             }
         }
 
@@ -254,15 +247,8 @@ namespace LazyCache
         {
             if (policy?.RemovedCallback != null)
             {
-                var originallCallback = policy.RemovedCallback;
-                policy.RemovedCallback = args =>
-                {
-                    //unwrap the cache item in a callback given one is specified
-                    var item = args?.CacheItem?.Value as AsyncLazy<T>;
-                    if (item != null)
-                        args.CacheItem.Value = item.IsValueCreated ? item.Value : Task.FromResult(default(T));
-                    originallCallback(args);
-                };
+                var originalCallback = policy.RemovedCallback;
+                policy.RemovedCallback = new CacheRemovalLazyUnwrapper<T>().UnwrapAsyncLazyPolicyRemovedCallback(originalCallback);
             }
         }
 
