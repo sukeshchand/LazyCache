@@ -33,7 +33,7 @@ namespace ConcurrentCacheUsageSample
 
             var cache = new CachingService();
 
-            SetKey(cache, "0");
+            SetKey(cache, GenerateRandomLengthValueToCache());
 
             PeriodicallyReadKey(cache, TimeSpan.FromSeconds(1));
 
@@ -47,7 +47,7 @@ namespace ConcurrentCacheUsageSample
 
         private static void SetKey(IAppCache cache, string value)
         {
-            Console.WriteLine("Setting: " + value);
+            Console.WriteLine("Setting: " + value.Length + " length string");
             var policy = Random.Next(2) == 0 ? slidingCachePolicy : absoluteCachePolicy; // 50/50 on which policy
             cache.Add(Key, value, policy);
         }
@@ -55,7 +55,7 @@ namespace ConcurrentCacheUsageSample
 
         private static void AfterEvicted(object key, object value, CacheEntryRemovedReason reason)
         {
-            Console.WriteLine("Evicted. Value: " + value + ", Reason: " + reason);
+            Console.WriteLine("Evicted. Value: " + value.ToString().Length + " length string because " + reason);
         }
 
         private static void PeriodicallySetKey(IAppCache cache, TimeSpan interval)
@@ -66,9 +66,16 @@ namespace ConcurrentCacheUsageSample
                 {
                     await Task.Delay(interval);
 
-                    SetKey(cache, "A");
+                    var randomLengthValueToCache = GenerateRandomLengthValueToCache();
+
+                    SetKey(cache, randomLengthValueToCache);
                 }
             });
+        }
+
+        private static string GenerateRandomLengthValueToCache()
+        {
+            return new string('*', Random.Next(5000));
         }
 
         private static void PeriodicallyReadKey(IAppCache cache, TimeSpan interval)
@@ -82,13 +89,12 @@ namespace ConcurrentCacheUsageSample
                     if (Random.Next(3) == 0) // 1/3 chance
                     {
                         // Allow values to expire due to sliding refresh.
-                        Console.WriteLine("Read skipped, random choice.");
+                        Console.WriteLine("Read skipped to allow occasional exiration at random choice.");
                     }
                     else
                     {
-                        Console.Write("Reading...");
-                        object result = cache.GetOrAdd(Key, () => "B", slidingCachePolicy);
-                        Console.WriteLine("Read: " + (result ?? "(null)"));
+                        object result = cache.GetOrAdd(Key, GenerateRandomLengthValueToCache, slidingCachePolicy);
+                        Console.WriteLine("Read " + (result != null ? (result.ToString().Length + " length"):  "null") + " string");
                     }
                 }
             });
